@@ -2,6 +2,7 @@
 const mysql = require('mysql2');
 const fs = require('fs');
 const express = require('express')
+// const inquirerData= require('index.js') ?? 
 
 // DATA
 const db = require('./config/connection.js') //modular login for privacy using dotenv

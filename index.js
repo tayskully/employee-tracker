@@ -31,16 +31,9 @@ const questions = [
   // WHEN I choose to update an employee role
   // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
 ];
-function init () {
-
-    inquirer.prompt(questions).then((data) => {
-        const filename = `${data.name.toLowerCase().split(" ").join("")}.json`;
-      
-        fs.writeFile(filename, JSON.stringify(data, null, "\t"), (err) =>
-          err ? console.log(err) : console.log("Success!")
-        );
-      });
-
-
+function init() {
+  inquirer.prompt(questions).then((data) => {
+    console.log(data);
+    //if statements for data??
+  });
 }
-

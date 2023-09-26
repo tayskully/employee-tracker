@@ -1,22 +1,7 @@
 const inquirer = require("inquirer");
 
-const questions = [
-  {
-    type: "list",
-    name: "options",
-    message: "What would you like to do?",
-    choices: [
-      "View all departments",
-      "View all roles",
-      "View all employees",
-      "Add a department",
-      "Add a role",
-      "Add an employee",
-      "Update an employee role",
-    ],
-  },
 
-  //WHEN I choose to view all departments
+    //WHEN I choose to view all departments
   // THEN I am presented with a formatted table showing department names and department ids
   // WHEN I choose to view all roles
   // THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
@@ -30,10 +15,86 @@ const questions = [
   // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
   // WHEN I choose to update an employee role
   // THEN I am prompted to select an employee to update and their new role and this information is updated in the database
-];
+
 function init() {
-  inquirer.prompt(questions).then((data) => {
-    console.log(data);
-    //if statements for data??
+  inquirer
+  .prompt({
+    
+      type: "list",
+      name: "options",
+      message: "What would you like to do?",
+      choices: [
+        "View all departments",
+        "View all roles",
+        "View all employees",
+        "Add a department",
+        "Add a role",
+        "Add an employee",
+        "Update an employee role"
+        // "Update employee managers",
+        // "View employees by manager",
+        // "View employees by department", 
+        // "Delete departments, roles, and employees",
+        // "View the total utilized budget of a department"
+      ],
+    })
+  .then((answer) => {
+    switch (answer.action) {
+      case "View all departments":
+        viewAllDepartments();
+        break;
+      case "View all roles":
+        viewAllRoles();
+        break;
+      case "View all employees":
+        viewAllEmployees();
+        break;
+      case "Add a department":
+        addADepartment();
+        break;
+      case "Add a role":
+        addARole();
+        break;
+      case "Add an employee":
+        addAnEmployee();
+        break;
+      case "Update an employee role":
+        updateAnEmployeeRole();
+        break;
+
+    //   case "Update employee Manager":
+    //         addEmployeeManager();
+    //         break;
+    //   case "View Employees by Manager":
+    //     viewEmployeesByManager();
+    //     break;
+    //   case "View Employees by Department":
+    //     viewEmployeesByDepartment();
+    //     break;
+    //   case "Delete Departments | Roles | Employees":
+    //     deleteDepartmentsRolesEmployees();
+    //     break;
+    //   case "View the total utilized budget of a department":
+    //     viewTotalUtilizedBudgetOfDepartment();
+    //     break;
+
+      case "Exit":
+        connection.end();
+        console.log("Goodbye!");
+        break;
+    }
   });
 }
+
+//Functions 
+function viewAllDepartments() {
+    const query = `SELECT * FROM departments`;
+    connection.query(query, (err, res) => {
+        if (err) throw err;
+        console.table(res);
+        init();
+    })
+}
+
+
+init();

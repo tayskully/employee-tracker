@@ -19,7 +19,6 @@ app.use(express.json());
 
 
 // ROUTES
-
 // GET Route for retrieving DB content
 
 // app.get("/api/movies", (req, res) => {

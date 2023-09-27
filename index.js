@@ -250,6 +250,7 @@ function addAnEmployee() {
 }
 
 function updateAnEmployeeRole() {
+  //3 queries for 3 dynamic menu options 
   const employeesQuery =
     "SELECT employees.id, employees.first_name, employees.last_name, roles.title FROM employees LEFT JOIN roles ON employees.role_id = roles.id";
   const rolesQuery = `SELECT * FROM roles`;
@@ -294,6 +295,7 @@ function updateAnEmployeeRole() {
             },
           ])
           .then((answer) => {
+            //find to get the matching option selected in prompts
             const employeeToUpdate = resEmployees.find(
               (employee) =>
                 `${employee.first_name} ${employee.last_name}` ===
@@ -305,7 +307,7 @@ function updateAnEmployeeRole() {
             const newManagerId = resManager.find(
               (manager) => manager.full_name === answer.new_manager
             );
-
+//set new options to employee to update
             const updateQuery =
               "UPDATE employees SET role_id = ?, manager_id = ? WHERE id = ?";
             const params = [newRoleId, newManagerId, employeeToUpdate.id];
@@ -322,7 +324,5 @@ function updateAnEmployeeRole() {
     });
   });
 }
-
+//run application on page load
 init();
-
-//do two for employees because oyu have to set manager, select all from employees, where manager_id is null

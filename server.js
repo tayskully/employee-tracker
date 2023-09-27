@@ -1,7 +1,7 @@
 // DEPENDENCIES
 const mysql = require('mysql2');
 const fs = require('fs');
-const express = require('express')
+const express = require('express');
 // const inquirerData= require('index.js') ?? 
 
 // DATA
